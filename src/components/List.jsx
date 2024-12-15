@@ -1,8 +1,5 @@
 import React from "react";
-import Movie from "./Movies/Movie";
 
-function List({ className, children }) {
+export function List({ className, children }) {
   return <ul className={`list ${className ? className : ""}`}>{children}</ul>;
 }
-
-export default List;
