@@ -1,11 +1,11 @@
 import Box from "./Box";
-import Details from "./Details";
+import Details from "./Watched/Details";
 import Error from "./Error";
 import List from "./List";
-import Movie from "./Movie";
-import Navbar from "./Navbar";
-import Summary from "./Summary";
-import Watched from "./Watched";
+import Movie from "./Movies/Movie";
+import Navbar from "./Nav/Navbar";
+import Summary from "./Watched/Summary";
+import Watched from "./Watched/Watched";
 
 // https://www.omdbapi.com/?apikey=${KEY}&s=${query}
 const tempMovieData = [
