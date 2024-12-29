@@ -3,11 +3,13 @@ import { Box } from "../Box";
 import { Error } from "../Error";
 import { List } from "../List";
 import { MovieItem } from "./MovieItem";
+import { Spinner } from "../Spinner";
 
-export function Movie() {
+export function Movie({ isLoading }) {
   return (
     <Box>
       <Error />
+      {isLoading && <Spinner />}
       <List className="list-movies">
         <MovieItem />
       </List>
