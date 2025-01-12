@@ -32,11 +32,13 @@ export async function getMovies(query, controller, setIsLoading, setIsError) {
     const data = await resp.json();
     setIsLoading(false);
     if (data.Response === "False") throw new Error("Can't find some movies 🥹");
+
     return data;
   } catch (error) {
     if (error.name === "AbortError") {
       console.log("предыдущий запрос отменен");
     } else {
+      console.log("Err");
       setIsError(true);
     }
   }

@@ -5,7 +5,7 @@ import { List } from "../List/List";
 import { MovieItem } from "./MovieItem";
 import { Spinner } from "../Spinner";
 
-export function Movie({ isLoading, isError }) {
+export function Movie({ isLoading, isError, movies }) {
   return (
     <Box>
       {isError && <Error />}
@@ -15,7 +15,8 @@ export function Movie({ isLoading, isError }) {
         </div>
       )}
       <List className="list-movies">
-        <MovieItem />
+        {movies &&
+          movies.map((item, ind) => <MovieItem key={ind} movie={item} />)}
       </List>
     </Box>
   );

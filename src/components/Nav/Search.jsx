@@ -5,7 +5,10 @@ export function Search({ onSearch }) {
 
   function changeHandler(e) {
     setValue(e.target.value);
+    // console.log("state^ ", value);
+
     onSearch(e.target.value);
+    // console.log("e.target ", e.target.value);
   }
 
   return (
