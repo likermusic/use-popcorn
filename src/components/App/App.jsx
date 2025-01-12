@@ -80,6 +80,8 @@ const tempWatchedData = [
 export function App() {
   const [numResults, setNumResults] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  // const []
   const abortController = useRef(null);
 
   async function searchHandler(value) {
@@ -90,7 +92,7 @@ export function App() {
     const controller = new AbortController();
     abortController.current = controller;
 
-    const data = await getMovies(value, controller, setIsLoading);
+    const data = await getMovies(value, controller, setIsLoading, setIsError);
 
     setNumResults(data?.totalResults || 0);
   }
@@ -107,7 +109,7 @@ export function App() {
     <>
       <Navbar onSearch={searchHandler} numResults={numResults} />
       <main className="main">
-        <Movie isLoading={isLoading} />
+        <Movie isLoading={isLoading} isError={isError} />
         <Watched />
       </main>
     </>

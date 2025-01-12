@@ -16,9 +16,10 @@ const API_KEY = "b1212e3a";
 //   }
 // }
 
-export async function getMovies(query, controller, setIsLoading) {
+export async function getMovies(query, controller, setIsLoading, setIsError) {
   try {
     setIsLoading(true);
+    setIsError(false);
     const resp = await fetch(
       `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`,
       {
@@ -36,7 +37,7 @@ export async function getMovies(query, controller, setIsLoading) {
     if (error.name === "AbortError") {
       console.log("предыдущий запрос отменен");
     } else {
-      console.log(error);
+      setIsError(true);
     }
   }
 }
