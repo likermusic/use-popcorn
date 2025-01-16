@@ -92,9 +92,12 @@ export function App() {
     const controller = new AbortController();
     abortController.current = controller;
 
-    const data = await getMovies(value, controller, setIsLoading, setIsError);
+    setIsLoading(true);
+    setIsError(false);
+    const data = await getMovies(value, controller);
     // isError && setIsMovies([]);
-
+    setIsLoading(false);
+    !data ? setIsError(true) : setIsError(false);
     data?.Search ? setIsMovies(data.Search) : setIsMovies([]);
     setNumResults(data?.totalResults || 0);
   }
