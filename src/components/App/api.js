@@ -36,9 +36,10 @@ export async function getMovies(query, controller, setIsLoading, setIsError) {
     return data;
   } catch (error) {
     if (error.name === "AbortError") {
-      console.log("предыдущий запрос отменен");
+      // console.log("предыдущий запрос отменен");
+      console.log(".");
     } else {
-      console.log("Err");
+      // console.log("Err");
       setIsError(true);
     }
   }

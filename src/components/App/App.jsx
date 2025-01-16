@@ -95,7 +95,7 @@ export function App() {
     const data = await getMovies(value, controller, setIsLoading, setIsError);
     // isError && setIsMovies([]);
 
-    data?.Search && setIsMovies(data.Search);
+    data?.Search ? setIsMovies(data.Search) : setIsMovies([]);
     setNumResults(data?.totalResults || 0);
   }
 
