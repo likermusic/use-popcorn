@@ -82,7 +82,7 @@ export function App() {
   const [isError, setIsError] = useState(false);
   const [movies, setIsMovies] = useState([]);
 
-  const [activeMovie, setActiveMovie] = useState();
+  const [activeMovie, setActiveMovie] = useState(null);
   const abortController = useRef(null);
 
   async function searchHandler(value) {
