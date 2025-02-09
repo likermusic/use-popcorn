@@ -25,7 +25,7 @@ export function StarRating() {
           color: "white",
         }}
       >
-        10/10
+        0/10
       </span>
     </div>
   );
