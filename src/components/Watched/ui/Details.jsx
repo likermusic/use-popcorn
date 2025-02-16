@@ -8,7 +8,8 @@ export function Details({ id }) {
   const [rating, setRating] = useState(0);
   const [movies, setMovies] = useState([]);
   const { description, isLoading, errorMsg } = useGetMovieDescription(id);
-  const [added, setAdded] = useState(false);
+
+  let movieIndex = movies?.findIndex((movie) => movie.id === id);
 
   return isLoading ? (
     <div className="spinner-wrapper">
@@ -38,15 +39,21 @@ export function Details({ id }) {
 
       <section>
         <div className="rating">
-          {!added && <StarRating rating={rating} setRating={setRating} />}
-          {!!rating && !added && (
-            <button onClick={() => setAdded(true)} className="btn-add">
+          <StarRating rating={rating} setRating={setRating} />
+          {!!rating && (
+            <button
+              onClick={() => {
+                setMovies((oldMovies) => [...oldMovies, { id, rating }]);
+              }}
+              className="btn-add"
+            >
               + Add to list
             </button>
           )}
-          {added && (
+          {movieIndex !== -1 && (
             <p>
-              You rated with movie {rating} <span>⭐️</span>
+              You rated with movie {movies[movieIndex]?.rating}
+              <span>⭐️</span>
             </p>
           )}
         </div>
