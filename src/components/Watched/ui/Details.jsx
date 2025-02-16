@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { Error } from "../../Error";
 import { Spinner } from "../../Spinner";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
 import { StarRating } from "./StarRating/StarRating";
 
 export function Details({ id }) {
+  const [rating, setRating] = useState(0);
+  const [movies, setMovies] = useState([]);
   const { description, isLoading, errorMsg } = useGetMovieDescription(id);
+  const [added, setAdded] = useState(false);
 
   return isLoading ? (
     <div className="spinner-wrapper">
@@ -34,11 +38,17 @@ export function Details({ id }) {
 
       <section>
         <div className="rating">
-          <StarRating />
-          <button className="btn-add">+ Add to list</button>
-          <p>
-            You rated with movie 7 <span>⭐️</span>
-          </p>
+          {!added && <StarRating rating={rating} setRating={setRating} />}
+          {!!rating && !added && (
+            <button onClick={() => setAdded(true)} className="btn-add">
+              + Add to list
+            </button>
+          )}
+          {added && (
+            <p>
+              You rated with movie {rating} <span>⭐️</span>
+            </p>
+          )}
         </div>
         <div className="details-overview">
           <p>
