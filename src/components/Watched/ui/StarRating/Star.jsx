@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 
-export function Star() {
-  const [tempRating, setTempRating] = useState(0);
-  const [move, setMove] = useState(false);
-
+export function Star({ fill, onHover, ind, onMark }) {
   return (
     <svg
-      onMouseEnter={() => {
-        setMove(true);
-      }}
-      onMouseLeave={() => setMove(false)}
+      onMouseEnter={() => onHover(ind + 1)}
+      onMouseLeave={() => onHover(0)}
+      onClick={() => onMark(ind + 1)}
       width="23px"
       height="23px"
       viewBox="0 0 24 24"
       // fill={ind < rating || ind < tempRating ? fillColor : "none"}
-      fill={move ? "gold" : "transparent"}
+      fill={fill}
       xmlns="http://www.w3.org/2000/svg"
       style={{ cursor: "pointer" }}
     >

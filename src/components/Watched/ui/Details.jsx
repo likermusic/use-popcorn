@@ -1,7 +1,7 @@
 import { Error } from "../../Error";
 import { Spinner } from "../../Spinner";
-import { StarRating } from "../../StarRating";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
+import { StarRating } from "./StarRating/StarRating";
 
 export function Details({ id }) {
   const { description, isLoading, errorMsg } = useGetMovieDescription(id);
