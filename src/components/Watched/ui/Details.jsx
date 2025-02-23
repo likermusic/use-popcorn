@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
 import { Error } from "../../Error";
 import { Spinner } from "../../Spinner";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
 import { StarRating } from "./StarRating/StarRating";
+import { useMovieRating } from "../model/useMovieRating";
 
 export function Details({ id }) {
-  const [rating, setRating] = useState(0);
-  const [ratedMovies, setRatedMovies] = useState([]);
-
   const { description, isLoading, errorMsg } = useGetMovieDescription(id);
-
-  let movieIndex = ratedMovies?.findIndex((movie) => movie.id === id);
-
-  useEffect(() => {
-    setRating(0);
-  }, [id]);
+  const { rating, ratedMovies, movieIndex, setRatedMovies, setRating } =
+    useMovieRating(id);
 
   return isLoading ? (
     <div className="spinner-wrapper">
@@ -26,7 +19,7 @@ export function Details({ id }) {
     <div className="details">
       <header>
         <button className="btn-back">&larr;</button>
-        <img src="https://m.media-amazon.com/images/M/MV5BMDFhNzU4MTMtYzZmNS00ZDEzLTg2MjQtYmUzZDA1ZWU4OTkzXkEyXkFqcGdeQXVyNDQ2MTMzODA@._V1_SX300.jpg" />
+        <img src={description?.Poster} />
         <div className="details-overview">
           <h2>{description?.Title}</h2>
           <p>
