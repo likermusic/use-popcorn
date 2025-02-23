@@ -3,8 +3,9 @@ import { Spinner } from "../../Spinner";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
 import { StarRating } from "./StarRating/StarRating";
 import { useMovieRating } from "../model/useMovieRating";
+import { useState } from "react";
 
-export function Details({ id }) {
+export function Details({ id, onReset }) {
   const { description, isLoading, errorMsg } = useGetMovieDescription(id);
   const { rating, ratedMovies, movieIndex, setRatedMovies, setRating } =
     useMovieRating(id);
@@ -18,7 +19,9 @@ export function Details({ id }) {
   ) : (
     <div className="details">
       <header>
-        <button className="btn-back">&larr;</button>
+        <button onClick={() => onReset(null)} className="btn-back">
+          &larr;
+        </button>
         <img src={description?.Poster} />
         <div className="details-overview">
           <h2>{description?.Title}</h2>

@@ -97,7 +97,7 @@ export function App() {
           activeMovie={activeMovie}
           setActiveMovie={setActiveMovie}
         />
-        <WatchedBlock id={activeMovie} />
+        <WatchedBlock id={activeMovie} onSetActiveMovie={setActiveMovie} />
       </main>
     </>
   );
