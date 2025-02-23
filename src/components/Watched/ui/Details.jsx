@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Error } from "../../Error";
 import { Spinner } from "../../Spinner";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
@@ -6,10 +6,15 @@ import { StarRating } from "./StarRating/StarRating";
 
 export function Details({ id }) {
   const [rating, setRating] = useState(0);
-  const [movies, setMovies] = useState([]);
+  const [ratedMovies, setRatedMovies] = useState([]);
+
   const { description, isLoading, errorMsg } = useGetMovieDescription(id);
 
-  let movieIndex = movies?.findIndex((movie) => movie.id === id);
+  let movieIndex = ratedMovies?.findIndex((movie) => movie.id === id);
+
+  useEffect(() => {
+    setRating(0);
+  }, [id]);
 
   return isLoading ? (
     <div className="spinner-wrapper">
@@ -39,11 +44,14 @@ export function Details({ id }) {
 
       <section>
         <div className="rating">
-          <StarRating rating={rating} setRating={setRating} />
-          {!!rating && (
+          {movieIndex === -1 && (
+            <StarRating rating={rating} setRating={setRating} />
+          )}
+
+          {!!rating && movieIndex === -1 && (
             <button
               onClick={() => {
-                setMovies((oldMovies) => [...oldMovies, { id, rating }]);
+                setRatedMovies((oldMovies) => [...oldMovies, { id, rating }]);
               }}
               className="btn-add"
             >
@@ -52,7 +60,7 @@ export function Details({ id }) {
           )}
           {movieIndex !== -1 && (
             <p>
-              You rated with movie {movies[movieIndex]?.rating}
+              You rated with movie {ratedMovies[movieIndex]?.rating}
               <span>⭐️</span>
             </p>
           )}
