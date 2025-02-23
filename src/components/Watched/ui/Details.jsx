@@ -5,10 +5,9 @@ import { StarRating } from "./StarRating/StarRating";
 import { useMovieRating } from "../model/useMovieRating";
 import { useState } from "react";
 
-export function Details({ id, onReset }) {
+export function Details({ id, onReset, ratedMovies, setRatedMovies }) {
   const { description, isLoading, errorMsg } = useGetMovieDescription(id);
-  const { rating, ratedMovies, movieIndex, setRatedMovies, setRating } =
-    useMovieRating(id);
+  const { rating, movieIndex, setRating } = useMovieRating(id, ratedMovies);
 
   return isLoading ? (
     <div className="spinner-wrapper">
@@ -47,7 +46,17 @@ export function Details({ id, onReset }) {
           {!!rating && movieIndex === -1 && (
             <button
               onClick={() => {
-                setRatedMovies((oldMovies) => [...oldMovies, { id, rating }]);
+                setRatedMovies((oldMovies) => [
+                  ...oldMovies,
+                  {
+                    id,
+                    rating,
+                    title: description.Title,
+                    imdbRating: description.imdbRating,
+                    runtime: description.Runtime,
+                    poster: description.Poster,
+                  },
+                ]);
               }}
               className="btn-add"
             >
